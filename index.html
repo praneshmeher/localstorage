@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Localstorage</title>
+    </head>
+    <style>
+        html{
+            display: flex;
+            justify-content: center;
+        }
+        input[type='checkbox']{
+            vertical-align: middle;
+        }
+    </style>
+    <body>
+        
+        <form class="form">
+            <input name='item' type="text">
+            <input type="submit" value="Add">
+        </form>
+        <ul class="list">
+            <li>Loading...</li>
+        </ul>
+        
+        <script>
+            const data = JSON.parse(localStorage.getItem('items')) || []
+
+            const listnode = document.querySelector('.list')
+            const formnode = document.querySelector('.form')
+            formnode.addEventListener('submit', addItem)
+            
+            function addItem(e){
+                e.preventDefault()
+                const value = this.querySelector("[name='item']").value
+                const obj = {
+                    label:value,
+                    checked:false
+                }
+                data.push(obj)
+                renderItem(data,listnode)   
+                localStorage.setItem('items', JSON.stringify(data))
+                this.reset()
+            }
+
+            renderItem(data, listnode)
+            function renderItem(data = [], listnode){
+                listnode.innerHTML = data.map((item, i)=>{
+                    return `<li>
+                        <input type='checkbox' data-index=${i} id=${i} ${item.checked ? 'checked' : ''}>
+                        <label for=${i}>${item.label}</label>
+                    </li>`
+                }).join('')
+            }
+            
+            listnode.addEventListener('click', toggle)
+            function toggle(e){
+                if(e.target.matches('input')){
+                    const index = e.target.dataset.index
+                    console.log(index)
+                    data[index].checked = !data[index].checked
+                    localStorage.setItem('items', JSON.stringify(data))
+                }
+            }
+        </script>
+    </body>
+</html>
