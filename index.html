@@ -17,8 +17,9 @@
             const data = JSON.parse(localStorage.getItem('items')) || []
             const listnode = document.querySelector('.list')
             const formnode = document.querySelector('.form')
-            formnode.addEventListener('submit', addItem)
             
+            formnode.addEventListener('submit', addItem)
+
             function addItem(e){
                 e.preventDefault()
                 const value = this.querySelector("[name='item']").value
@@ -33,6 +34,7 @@
             }
 
             renderItem(data, listnode)
+
             function renderItem(data = [], listnode){
                 listnode.innerHTML = data.map((item, i)=>{
                     return `<li>
@@ -43,6 +45,7 @@
             }
             
             listnode.addEventListener('click', toggle)
+
             function toggle(e){
                 if(e.target.matches('input')){
                     const index = e.target.dataset.index
@@ -52,6 +55,6 @@
                 }
             }
         </script>
-        
+
     </body>
 </html>
