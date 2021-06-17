@@ -1,0 +1,7 @@
+html{
+    display: flex;
+    justify-content: center;
+}
+input[type='checkbox']{
+    vertical-align: middle;
+}

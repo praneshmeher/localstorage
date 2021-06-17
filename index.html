@@ -1,16 +1,8 @@
 <html>
     <head>
         <title>Localstorage</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <style>
-        html{
-            display: flex;
-            justify-content: center;
-        }
-        input[type='checkbox']{
-            vertical-align: middle;
-        }
-    </style>
     <body>
         
         <form class="form">
@@ -23,7 +15,6 @@
         
         <script>
             const data = JSON.parse(localStorage.getItem('items')) || []
-
             const listnode = document.querySelector('.list')
             const formnode = document.querySelector('.form')
             formnode.addEventListener('submit', addItem)
@@ -61,5 +52,6 @@
                 }
             }
         </script>
+        
     </body>
 </html>
